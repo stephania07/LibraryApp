@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-libApp="libraryApp">
+  <head>
+  <!-- <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+  <title>Libray Application</title>
+  </head>
+<body>
+  <h1>LibraryApp</h1>
+	<div class="container" ng-controller="LibraryAppController as libCtrl">
+	  <form name="myForm" ng-submit="myForm.$valid && libCtrl.addNewBook()" novalidate>
+	    <label>URL</label><input/>
+	    <label>Title</label><input type="text" ng-model="libCtrl.newBook.title"/>
+	    <label>Author</label><input type="text" ng-model="libCtrl.newBook.author"/>
+	    <label>Price</label><input type="price" ng-model="libCtrl.newBook.price"/>
+	    <select ng-model="libCtrl.newBook.category">
+	      <option value="{{val}}" ng-repeat="(val, text) in libCtrl.categoryOptions">{{text}}</option>
+	    </select>
+	    <input type="submit" value="Add Book">
+	  </form>
+  <table>
+	  <thead>
+	   <tr>				
+        <th>Image</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Remove</th>
+	   </tr>
+	  </thead>
+	<tbody>
+	  <tr ng-repeat="book in libCtrl.books">
+		<td><img class="lib-img" ng-src="{{book.image}}"></td>
+		<td>{{book.title}}</td>
+		<td>{{book.author}}</td>
+		<td>{{book.price}}</td>
+		<td>{{book.category}}</td>
+		<td><button ng-click="libCtrl.removeLib(book)">Remove</button></td>
+	  </tr>
+    </tbody>		
+  </table>
+	</div>
+	  <script src="bower_components/angularjs/angular.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
