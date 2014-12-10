@@ -1,0 +1,27 @@
+<table>
+	 <thead>
+	   <tr>				
+        <th>Image</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Price</th>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Remove</th>
+	   </tr>
+	 </thead>
+	<tbody>
+	  <tr ng-repeat="(bookId, book) in lib.books">
+	  	<td><img class="lib-img" ng-src="{{book.image}}"></td>
+		<td>{{book.title}}</td>
+	  	<td>{{book.author}}</td>
+	  	<td>{{book.price}}</td>
+	  	<td>{{book.date | date}}</td>
+	  	<td>{{book.category}}</td>
+	  	<td>
+	  	<a class="btn btn-primary" href="/#/{{bookId}}">Show</a>
+	  	<button ng-click="lib.removeLib(bookId)">Remove</button>
+	  	</td>
+	  </tr>
+    </tbody>		
+</table>

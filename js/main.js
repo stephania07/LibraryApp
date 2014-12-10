@@ -1,41 +1,68 @@
 ;(function(){
   'use strict';
-	angular.module("libraryApp", [])
-  .controller("LibraryAppController", function() {
+	angular.module("libraryApp", ['ngRoute'])
+    .config(function($routeProvider){
+      $routeProvider
+      .when('/', {
+        templateUrl: 'views/table.html',
+        controller: 'LibraryAppController',
+        controllerAs: 'lib'
+      })
+      .when('/new', {
+        templateUrl: 'views/form.html',
+        controller: 'LibraryAppController',
+        controllerAs: 'lib'
+      })
+      .when('/:id', {
+        templateUrl: 'views/show.html',
+        controller: 'ShowController',
+        controllerAs: 'show'
+      })
+      .otherwise({redirectTo: '/'});
+    })
+    .controller("ShowController", function($http, $routeParams) {
     var vm = this;
-    vm.books = [
-      {
-      	image: 'http://eloquentjavascript.net/img/cover.png',
-      	title: 'Eloquent JavaScript',
-      	author: 'Marijn Haverbeke',
-      	price: '$28.03',
-        date:  '2/2/2014',
-      	category: 'Science'
-      },
-      {
-      	image: 'http://ecx.images-amazon.com/images/I/617LMuOkVWL._SL1000_.jpg',
-      	title: 'A Smarter Way to Learn JavaScript',
-      	author: 'Mark Myers',
-      	price: '$19.00',
-        date:   '2/3/2014',
-      	category: 'Science'
-      },
-      {
-      	image: 'http://i.imgur.com/POdp47Yb.jpg',
-      	title: 'The Alchemist',
-      	author: 'Paulo Coelho',
-      	price: '$17.31,',
-        date:  '1/1/2014',
-      	category: 'Fiction'
-      },
-    ];
+    var id = $routeParams.id;
+     $http.get("https://librarybookapp.firebaseio.com/books/" + id + ".json")
+       .success(function(data){
+          vm.books = data;
+       })
+       .error(function(err){
+         console.log(err);
+     })
+    })
+  .controller("LibraryAppController", function($http) {
+    var vm = this;
+    
+     $http.get("https://librarybookapp.firebaseio.com/books.json")
+       .success(function(data){
+          vm.books = data;
+       })
+       .error(function(err){
+         console.log(err);
+       })
+
+
     vm.addNewBook = function(){
-    	vm.books.push(vm.newBook);
-    	vm.newTask = null;
+      $http.post("https://librarybookapp.firebaseio.com/books.json", vm.newBook)
+      .success(function(data){
+        vm.books[data.name] = vm.newBook;
+        vm.newBook = _freshBook();
+      })
+      .error(function(err){
+        console.log(err);
+      });
     };
-    vm.removeLib = function(lib) {
-      var index =  vm.books.indexOf(lib);
-      vm.books.splice(index, 1);
+    	
+    vm.removeLib = function(libId) {
+      var url = "https://librarybookapp.firebaseio.com/books/" + libId + ".json";
+      $http.delete(url)
+        .success(function(){
+          delete vm.books[lib];
+        })
+        .error(function(err){
+          console.log(err);
+        });
     };
 
     vm.newBook = _freshBook();

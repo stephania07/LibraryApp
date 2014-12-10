@@ -1,0 +1,23 @@
+<form name="myForm" ng-submit="myForm.$valid && lib.addNewBook()" novalidate>
+   <div class="control-label">
+     <label class="control-label">Url</label><input/>
+   </div>
+   <div class="form-group" ng-class="{'has-error': !lib.newBook.title}">
+	 <label class="control-label">Title</label><input  type="text" ng-model="lib.newBook.title" required/>
+   </div>				
+   <div class="form-group" ng-class="{'has-error': !lib.newBook.author}">
+     <label class="control-label">Author</label><input type="text" ng-model="lib.newBook.author" required/>
+   </div>
+   <div class="form-group" ng-class="{'has-error': !lib.newBook.price}">
+     <label class="control-label">Price</label><input type="price" ng-model="lib.newBook.price" required/>
+   </div>
+   <div class="form-group" ng-class="{'has-error': !lib.newBook.date}">
+     <label class="control-label">Date</label><input type="price" ng-model="lib.newBook.date" required/>
+   </div>
+   <div class="form-group">
+     <select ng-model="lib.newBook.category">
+	   <option value="{{val}}" ng-repeat="(val, text) in lib.categoryOptions">{{text}}</option>
+	 </select>
+   </div>
+	 <input type="submit" value="Add Book" ng-show="myForm.$valid" ></input>
+</form>
