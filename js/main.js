@@ -9,6 +9,7 @@
       	title: 'Eloquent JavaScript',
       	author: 'Marijn Haverbeke',
       	price: '$28.03',
+        date:  '2/2/2014',
       	category: 'Science'
       },
       {
@@ -16,6 +17,7 @@
       	title: 'A Smarter Way to Learn JavaScript',
       	author: 'Mark Myers',
       	price: '$19.00',
+        date:   '2/3/2014',
       	category: 'Science'
       },
       {
@@ -23,6 +25,7 @@
       	title: 'The Alchemist',
       	author: 'Paulo Coelho',
       	price: '$17.31,',
+        date:  '1/1/2014',
       	category: 'Fiction'
       },
     ];
@@ -31,8 +34,8 @@
     	vm.newTask = null;
     };
     vm.removeLib = function(lib) {
-      var index =  vim.books.indexOf(lib);
-      vim.books.splice(index, 1);
+      var index =  vm.books.indexOf(lib);
+      vm.books.splice(index, 1);
     };
 
     vm.newBook = _freshBook();
