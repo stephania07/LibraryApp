@@ -1,6 +1,63 @@
 ;(function(){
   'use strict';
   angular.module('libraryApp')
+  .controller('LoginController', function($scope, $location){
+   var vm =  this;
+    vm.login =function(){
+      var ref = new Firebase("https://librarybookapp.firebaseio.com");
+
+    ref.authWithPassword({
+      email : vm.email,
+      password : vm.password
+    }, function(error, authData) {
+      if(error === null){
+        console.log('User logged in successfully', authData);
+        $location.path('/');
+        $scope.$apply();
+      }else{
+        console.log('Error loggin in user', error);
+      }
+    });
+    }
+    vm.register = function(){
+      var ref = new Firebase("https://librarybookapp.firebaseio.com"); 
+      
+      ref.createUser({
+        email : vm.email,
+        password : vm.password
+      }, function(error, authData){
+        if(error === null){
+          console.log('User created successfully', authData);
+          vm.login();
+        }else{
+          console.log('Error creating user:', error);
+        }
+      });
+     }
+     vm.forgotPassword = function(){
+      var ref = new Firebase("https://librarybookapp.firebaseio.com"); 
+      
+      ref.resetPassword({
+        email : vm.email
+      }, function(error){
+        if(error === null){
+          console.log('User reset email sent successfully');  
+        }else{
+          console.log('Error sending password reset email:', error);
+        }
+      });
+     };
+
+   })
+  .controller("LogoutController", function($scope, $location) {
+      var ref = new Firebase("https://librarybookapp.firebaseio.com"); 
+      ref.unauth(function(){
+        $location.path('/');
+        $scope.$apply();
+        
+        });
+    })
+      
   .controller("ShowController", function($routeParams, libFactory) {
       var vm = this;
       var id = $routeParams.id;

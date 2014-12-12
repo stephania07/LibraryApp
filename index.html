@@ -10,8 +10,9 @@
 <body>
   <h1>LibraryApp</h1>
 	<div class="container">
-	<a class="btn btn-primary" href="/#/">All Books</a>
-	<a class="btn btn-primary" href="/#/new">New Book</a>
+	<a class="btn btn-primary" href="/#/books">All Books</a>
+	<a class="btn btn-primary" href="/#/books/new">New Book</a>
+	<a class="btn btn-danger" href="/#/logout">Logout</a>
 	<div ng-view></div>
 	</div>
 	  <script src="bower_components/firebase/firebase.js"></script>
@@ -24,7 +25,8 @@
 	  <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="js/main.js"></script>
     <script src="js/config.js"></script>
-    <script src="js/controller.js"></script>
     <script src="js/factory.js"></script>
+    <script src="js/controller.js"></script>  
+    <script src="js/constants.js"></script>
 </body>
 </html>
