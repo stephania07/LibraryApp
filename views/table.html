@@ -16,10 +16,11 @@
 		<td>{{book.title}}</td>
 	  	<td>{{book.author}}</td>
 	  	<td>{{book.price}}</td>
-	  	<td>{{book.date | date}}</td>
+	  	<td>{{book.date}}</td>
 	  	<td>{{book.category}}</td>
 	  	<td>
 	  	<a class="btn btn-primary" href="/#/{{bookId}}">Show</a>
+	  	<a class="btn btn-primary" href="/#/{{bookId}}/edit">Edit</a>
 	  	<button ng-click="lib.removeLib(bookId)">Remove</button>
 	  	</td>
 	  </tr>
