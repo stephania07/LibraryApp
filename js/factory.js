@@ -1,10 +1,11 @@
 ;(function(){
   'use strict';
   angular.module('libraryApp')
-  .factory('libFactory', function($http, $location){
+  .constant('FIREBASE_URL', "https://librarybookapp.firebaseio.com" )
+  .factory('libFactory', function(FIREBASE_URL, $http, $location){
   
      function getLib(id, cb) {
-       var url = "https://librarybookapp.firebaseio.com/books/" + id + ".json";
+       var url = FIREBASE_URL + "/books/" + id + ".json";
        $http.get(url)
        .success(function(data){
          cb(data);
@@ -14,7 +15,7 @@
        });
      }
      function editLib(id, lib){
-      var url = "https://librarybookapp.firebaseio.com/books/" + id + ".json";
+      var url = FIREBASE_URL + "/books/" + id + ".json";
        $http.put(url, lib)
        .success(function(data){
         $location.path('/');
@@ -24,7 +25,7 @@
       });
      }
      function getAllLib(cb){
-       $http.get("https://librarybookapp.firebaseio.com/books.json")
+       $http.get(FIREBASE_URL + "/books.json")
         .success(function(data){
           cb(data);
         })
@@ -33,7 +34,7 @@
         });
      }
      function createLib(book, cb){
-      $http.get("https://librarybookapp.firebaseio.com/books.json")
+      $http.get(FIREBASE_URL + "/books.json")
         .success(function(data){
           cb(data);
         })
@@ -42,7 +43,7 @@
         });
      }
      function deleteLib(libId, cb){
-       var url = "https://librarybookapp.firebaseio.com/books/" + libId + ".json";    
+       var url = FIREBASE_URL +"/books/" + libId + ".json";    
         $http.delete(url)
         .success(function(){
           cb();
