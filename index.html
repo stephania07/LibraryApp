@@ -8,11 +8,14 @@
 	<title>Library Application</title>
   </head>
 <body>
-  <h1>LibraryApp</h1>
+  <h1 ng-hide="user">LibraryApp</h1>
+  <h1 ng-show= "user">{{user.password.email}}'s Books</h1>
 	<div class="container">
-	<a class="btn btn-primary" href="/#/books">All Books</a>
-	<a class="btn btn-primary" href="/#/books/new">New Book</a>
-	<a class="btn btn-danger" href="/#/logout">Logout</a>
+	<a class="btn btn-primary" href="/#/books" ng-show="user">All Books</a>
+	<a class="btn btn-primary" href="/#/books/new" ng-show="user">New Book</a>
+	<a class="btn btn-success" ng-hide="user" href="/#/login">Login</a>
+	<a class="btn btn-warning" ng-show="user" href="/#/changepassword">Change Password</a>
+	<a class="btn btn-danger" ng-show="user" href="/#/logout">Logout</a>
 	<div ng-view></div>
 	</div>
 	  <script src="bower_components/firebase/firebase.js"></script>

@@ -9,12 +9,18 @@
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginController',
-        controllerAs: 'login'
+        controllerAs: 'login',
+        resolve: {
+          data: function(authFactory){
+            authFactory.disallowLogin();
+          }
+        }
       })
       .when('/changepassword', {
         templateUrl: 'views/changepassword.html',
         controller: 'ChangePasswordController',
-        controllerAs: 'changepw'
+        controllerAs: 'changepw',
+        private: true
       })
       .when('/logout',{
         template: '',
@@ -23,23 +29,34 @@
       .when('/books', {
         templateUrl: 'views/table.html',
         controller: 'LibraryAppController',
-        controllerAs: 'lib'
+        controllerAs: 'lib',
+        private: true
       })
       .when('/books/new', {
         templateUrl: 'views/form.html',
         controller: 'LibraryAppController',
-        controllerAs: 'lib'
+        controllerAs: 'lib',
+        private: true
       })
       .when('/books/:id', {
         templateUrl: 'views/show.html',
         controller: 'ShowController',
-        controllerAs: 'show'
+        controllerAs: 'show',
+        private: true
       })
       .when('/books/:id/edit', {
         templateUrl: 'views/form.html',
         controller: 'EditController',
-        controllerAs: 'lib'
+        controllerAs: 'lib',
+        private: true
       })
       .otherwise({redirectTo: '/'});
     })
-})();
+  .run(function($rootScope, authFactory){
+    $rootScope.$on('routeChangeStart', function(event, nextRoute, priorRoute){
+      if (nextRoute.$$route && nextRoute.$$route.private){
+        authFactory.requireLogin();
+      }    
+    })
+  })
+}());
