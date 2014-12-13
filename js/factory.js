@@ -1,13 +1,13 @@
 ;(function(){
   'use strict';
   angular.module('libraryApp')
-  .factory('libFactory', function(FIREBASE_URL, $http, $location){
+  .factory('libFactory', function($rootScope, FIREBASE_URL, $http, $location){
      
       function _libsUrl(id){
         if(id){
-          return FIREBASE_URL + "/books" + id + ".json";
+          return FIREBASE_URL + "/users/" + $rootScope.user.uid + '/books/'+ id + ".json";
         }else{
-          return FIREBASE_URL + "/books.json";
+          return FIREBASE_URL + "/users/" + $rootScope.user.uid + "/books.json";
         }
       }
 
