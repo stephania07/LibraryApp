@@ -1,5 +1,5 @@
 ;(function(){
   'use strict';
-	angular.module("libraryApp", ['ngRoute'])
+	angular.module("libraryApp", ['ngRoute', 'mgcrea.ngStrap'])
   
 })();

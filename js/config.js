@@ -11,6 +11,11 @@
         controller: 'LoginController',
         controllerAs: 'login'
       })
+      .when('/changepassword', {
+        templateUrl: 'views/changepassword.html',
+        controller: 'ChangePasswordController',
+        controllerAs: 'changepw'
+      })
       .when('/logout',{
         template: '',
         controller: 'LogoutController'
