@@ -9,6 +9,7 @@
   </head>
 <body>
   <h1 ng-hide="user">LibraryApp</h1>
+  <hr>
   <h1 ng-show= "user">{{user.password.email}}'s Books</h1>
 	<div class="container">
 	<a class="btn btn-primary" href="/#/books" ng-show="user">All Books</a>
@@ -27,9 +28,13 @@
 	  <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
 	  <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/config.js"></script>
-    <script src="js/factory.js"></script>
-    <script src="js/controller.js"></script>  
-    <script src="js/constants.js"></script>
+    <script src="js/main.config.js"></script>
+    <script src="js/main.constants.js"></script>
+    <script src="js/auth.controller.js"></script>
+    <script src="js/auth.factory.js"></script>
+    <script src="js/auth.route.js"></script>
+    <script src="js/lib.config.js"></script>
+    <script src="js/lib.controllers.js"></script>
+    <script src="js/lib.factory.js"></script>
 </body>
 </html>

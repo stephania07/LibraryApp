@@ -15,7 +15,7 @@
 	  	<td><img class="lib-img" ng-src="{{book.image}}"></td>
 		<td>{{book.title}}</td>
 	  	<td>{{book.author}}</td>
-	  	<td>{{book.price}}</td>
+	  	<td>{{book.price |currency:"$":0}}</td>
 	  	<td>{{book.date}}</td>
 	  	<td>{{book.category}}</td>
 	  	<td>
